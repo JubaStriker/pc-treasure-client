@@ -21,9 +21,9 @@ const Navbar = () => {
         <li><NavLink to='/home' className={({ isActive }) =>
             isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
         }>Home</NavLink></li>
-        <li><NavLink to='/' className={({ isActive }) =>
+        <li><NavLink to='/login' className={({ isActive }) =>
             isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
-        }>Products</NavLink></li>
+        }>Login</NavLink></li>
         <li><NavLink to='/blog' className={({ isActive }) =>
             isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
         }>Blog</NavLink></li>
