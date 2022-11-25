@@ -13,7 +13,7 @@ module.exports = {
           "secondary": "#f993a7",
           "accent": "#71b71b",
           "neutral": "#231826",
-          "base-100": "#E6E6EA",
+          "base-100": "#FFFFFF",
           "info": "#ABC9E7",
           "success": "#52EB96",
           "warning": "#9F5704",
@@ -31,7 +31,7 @@ module.exports = {
           "info": "#5B81EC",
           "success": "#54D999",
           "warning": "#C57111",
-          "error": "#E66C65",
+          "error": "#E66C65"
         }
       }],
   },
