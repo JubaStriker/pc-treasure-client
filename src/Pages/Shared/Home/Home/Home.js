@@ -12,7 +12,7 @@ const Home = () => {
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
-    console.log(categories);
+
 
 
     return (
@@ -20,7 +20,7 @@ const Home = () => {
             <h1 className=' text-4xl lg:text-7xl font-semibold my-2'>Welcome to <span className='font-mono'>PC Treasure</span></h1>
             <div className='flex flex-col lg:flex-row justify-around items-center'>
                 <div>
-                    <h2 className=' text-3xl lg:text-6xl font-semibold mt-8 mb-6 text-transparent bg-clip-text bg-gradient-to-tr from-primary to-success'>A secure place  to  <span><Typewriter
+                    <h2 className=' text-3xl lg:text-8xl font-semibold mt-8 mb-6 text-transparent bg-clip-text bg-gradient-to-tr from-primary to-success'>A secure place  to  <span><Typewriter
                         options={{
                             strings: ['Buy', 'Sell'],
                             autoStart: true,
@@ -43,19 +43,20 @@ const Home = () => {
 
             <div className='flex flex-col lg:flex-row justify-center items-center gap-16 my-24'>{
                 categories?.map(category =>
-                    <div className="card card-compact w-96 bg-base-100 shadow-xl hover:-translate-y-2">
-                        <figure><img src={category.image} alt="Shoes" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">{category.name}</h2>
 
-                            <div className="card-actions justify-end">
-                                <Link to={`/category/${category._id}`} ><button className="btn btn-primary">Buy Now</button></Link>
-                            </div>
-                        </div>
+                    <div className="relative group flex justify-center items-center h-full w-full">
+                        <img className="object-center object-cover h-full w-full" src={category.image} alt="girl" />
+
+                        <button className="bottom-4 z-10 absolute text-base font-medium  text-gray-100 py-3 w-36 ">
+                            <Link to={`/category/${category._id}`} ><button className="btn btn-accent text-white">{category.name}</button></Link>
+                        </button>
+
                     </div>
+
                 )}
 
             </div>
+
 
 
             <div class="w-full p-4 text-center border-0 rounded-lg sm:p-8 mt-32 ">
