@@ -13,7 +13,8 @@ export const router = createBrowserRouter([
         },
         {
             path: '/home',
-            element: <Home />
+            element: <Home />,
+            loader: () => fetch('http://localhost:5000/categories')
         },
         {
             path: '/blog',
