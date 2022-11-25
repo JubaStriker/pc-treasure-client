@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
 import { ThemeContext } from './Context/Theme/ThemeProvider';
@@ -18,6 +19,7 @@ function App() {
   return (
     <div data-theme={`${theme}`} >
       <RouterProvider router={router}></RouterProvider>
+      <Toaster />
     </div>
   );
 }
