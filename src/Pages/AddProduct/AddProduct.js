@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const AddProduct = () => {
@@ -7,6 +9,7 @@ const AddProduct = () => {
     const { user } = useContext(AuthContext)
     const imageHostKey = process.env.REACT_APP_imgbb_key
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
 
     const handleAddProduct = (data) => {
         const image = data.image[0];
@@ -34,6 +37,19 @@ const AddProduct = () => {
                         isVerified: "false"
                     }
                     console.log(product);
+                    fetch('http://localhost:5000/allproducts', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                        },
+                        body: JSON.stringify(product)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log(result)
+                            toast.success(`${data.productName} added successfully`)
+                            navigate('/dashboard')
+                        })
                 }
             })
 
@@ -74,7 +90,7 @@ const AddProduct = () => {
                     </div>
                     <div className="form-control w-full max-w-lg">
                         <label className="label"> <span className="label-text">Upload Time</span></label>
-                        <input type="text" {...register("uploadTime", {
+                        <input type="text" placeholder='mm:hh AM/PM, dd/mm/yy'{...register("uploadTime", {
                             required: "Upload Time is Required"
                         })} className="input input-bordered w-full max-w-lg" />
                         {errors.uploadTime && <p className='text-red-500'>{errors.uploadTime.message}</p>}

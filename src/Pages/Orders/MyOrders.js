@@ -15,7 +15,7 @@ const MyOrders = () => {
             return data;
         }
     })
-
+    console.log(bookings);
 
 
     return (
@@ -27,9 +27,12 @@ const MyOrders = () => {
                     <thead>
                         <tr className='hover'>
                             <th></th>
+                            <th>Product</th>
                             <th>Name</th>
                             <th>Price</th>
                             <th>Location</th>
+                            <th>Delete</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,9 +41,16 @@ const MyOrders = () => {
                             bookings &&
                             bookings?.map((booking, i) => <tr key={booking._id} className='hover'>
                                 <th>{i + 1}</th>
+                                <td>
+                                    <div className="w-24 mask mask-squircle">
+                                        <img src={booking.image} alt='' />
+                                    </div>
+                                </td>
                                 <td>{booking.product}</td>
                                 <td>{booking.price}</td>
                                 <td>{booking.location}</td>
+                                <td><p className='btn btn-error'>X</p></td>
+                                <td></td>
 
                             </tr>)
                         }
