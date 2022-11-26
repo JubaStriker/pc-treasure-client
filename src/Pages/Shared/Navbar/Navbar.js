@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ThemeContext } from '../../../Context/Theme/ThemeProvider';
 import { CiLight, CiDark } from 'react-icons/ci'
+import { AuthContext } from '../../../Context/AuthProvider';
 
 const Navbar = () => {
 
     const { toggleTheme, setToggleTheme } = useContext(ThemeContext)
+    const { user, logOut } = useContext(AuthContext)
 
     let theme = "light"
 
@@ -15,15 +17,22 @@ const Navbar = () => {
     else {
         theme = "dark";
     }
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(err => { console.error(err) })
+    }
 
     const menuItems = <>
 
         <li><NavLink to='/home' className={({ isActive }) =>
             isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
         }>Home</NavLink></li>
-        <li><NavLink to='/login' className={({ isActive }) =>
+        {user?.displayName ? <li><NavLink to='/login' className={({ isActive }) =>
             isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
-        }>Login</NavLink></li>
+        } onClick={handleLogOut}>Sign out</NavLink></li> : <li><NavLink to='/login' className={({ isActive }) =>
+            isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
+        }>Login</NavLink></li>}
         <li><NavLink to='/blog' className={({ isActive }) =>
             isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
         }>Blog</NavLink></li>
@@ -59,6 +68,7 @@ const Navbar = () => {
                             {menuItems}
                         </ul>
                     </div>
+                    {user?.displayName ? <p>Hi {user.displayName}</p> : ""}
                     <p onClick={() => setToggleTheme(!toggleTheme)} className="text-2xl font-extrabold lg:pr-6">{toggleTheme ? <CiDark /> : <CiLight />}</p>
                     {/* <label htmlFor='dashboard-drawer' tabIndex={2} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>

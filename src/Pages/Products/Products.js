@@ -31,7 +31,7 @@ const Products = () => {
                         <p className='text-lg'> Location: {product.location}</p>
 
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Buy Now</button>
+                            <button className="btn btn-primary">Book Now</button>
                         </div>
                     </div>
                 </div>)}

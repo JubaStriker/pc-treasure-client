@@ -44,11 +44,11 @@ const Home = () => {
             <div className='flex flex-col lg:flex-row justify-center items-center gap-16 my-24'>{
                 categories?.map(category =>
 
-                    <div className="relative group flex justify-center items-center h-full w-full">
+                    <div key={category._id} className="relative group flex justify-center items-center h-full w-full">
                         <img className="object-center object-cover h-full w-full" src={category.image} alt="girl" />
 
                         <button className="bottom-4 z-10 absolute text-base font-medium  text-gray-100 py-3 w-36 ">
-                            <Link to={`/category/${category._id}`} ><button className="btn btn-accent text-white">{category.name}</button></Link>
+                            <Link to={`/category/${category._id}`} ><div className="btn btn-accent text-white">{category.name}</div></Link>
                         </button>
 
                     </div>
