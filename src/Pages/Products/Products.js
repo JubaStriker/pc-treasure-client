@@ -7,14 +7,15 @@ const Products = () => {
 
     const [product, setProduct] = useState(null)
     const data = useLoaderData();
-    const products = data[0].products
+    const products = data;
+    console.log(products);
 
 
 
     return (
         <div>
             <h1 className=' text-4xl p-3 lg:p-10'>
-                All available {data[0].name}
+                All available products
             </h1>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 max-w-7xl py-6 px-10 mx-auto'>

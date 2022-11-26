@@ -5,17 +5,45 @@ import { AuthContext } from '../../Context/AuthProvider';
 const AddProduct = () => {
 
     const { user } = useContext(AuthContext)
+    const imageHostKey = process.env.REACT_APP_imgbb_key
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const handleAddDoctor = (data) => {
-        console.log(data);
+    const handleAddProduct = (data) => {
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
+
+                    const product = {
+                        name: data.productName,
+                        category: data.category,
+                        picture: imgData.data.url,
+                        location: data.location,
+                        resalePrice: data.resalePrice,
+                        marketPrice: data.marketPrice,
+                        used: data.used,
+                        time: data.uploadTime,
+                        sellerName: data.sellerName,
+                        isVerified: "false"
+                    }
+                    console.log(product);
+                }
+            })
+
     }
 
     return (
         <div className='mb-20'>
             <h1 className='text-4xl font-semibold my-5 mx-4'>Add Products </h1>
             <div className='w-1/2 p-7 mb-20'>
-                <form onSubmit={handleSubmit(handleAddDoctor)}>
+                <form onSubmit={handleSubmit(handleAddProduct)}>
                     <div className="form-control w-full max-w-lg">
                         <label className="label"> <span className="label-text">Product Name</span></label>
                         <input type="text" {...register("productName", {
@@ -36,6 +64,13 @@ const AddProduct = () => {
                             required: "Resale price is Required"
                         })} className="input input-bordered w-full max-w-lg" />
                         {errors.resalePrice && <p className='text-red-500'>{errors.resalePrice.message}</p>}
+                    </div>
+                    <div className="form-control w-full max-w-lg">
+                        <label className="label"> <span className="label-text">Used for</span></label>
+                        <input type="text" placeholder='months' {...register("used", {
+                            required: "Field is Required"
+                        })} className="input input-bordered w-full max-w-lg" />
+                        {errors.used && <p className='text-red-500'>{errors.used.message}</p>}
                     </div>
                     <div className="form-control w-full max-w-lg">
                         <label className="label"> <span className="label-text">Upload Time</span></label>
@@ -75,10 +110,10 @@ const AddProduct = () => {
                     <div className="form-control w-full max-w-lg">
                         <label className="label"> <span className="label-text">Category</span></label>
                         <select className="select select-bordered w-full max-w-lg"
-                            {...register("specialty", {
+                            {...register("category", {
                                 required: true
                             })}>
-                            <option>Graphics Card</option>
+                            <option>Gpu</option>
                             <option>Ram</option>
                             <option>Mouse</option>
                         </select>
