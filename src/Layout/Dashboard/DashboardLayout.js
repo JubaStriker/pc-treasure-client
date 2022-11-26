@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { ThemeContext } from '../../Context/Theme/ThemeProvider';
+import Footer from '../../Pages/Shared/Footer/Footer';
 import Navbar from '../../Pages/Shared/Navbar/Navbar';
 
 const DashboardLayout = () => {
@@ -28,17 +29,21 @@ const DashboardLayout = () => {
                     <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
                     <ul className="menu p-4 w-80 text-base-content bg-base-200">
                         {/* <!-- Sidebar content here --> */}
-                        <li><Link to='/dashboard'>My Orders</Link></li>
+                        <li><Link to=''></Link></li>
+                        <li><NavLink to='/dashboard/myorders' className={({ isActive }) =>
+                            isActive ? "bg-primary text-white font-semibold" : ""
+                        }>My Orders</NavLink></li>
+                        <li><NavLink to='/dashboard/addproduct' className={({ isActive }) =>
+                            isActive ? "bg-primary text-white font-semibold" : ""
+                        }>Add Products</NavLink></li>
                         <li><Link to='/dashboard/allUsers'>All users</Link></li>
-                        <li><Link to='/dashboard/addDoctor'>Add A Doctor</Link></li>
+
                         <li><Link to='/dashboard/managedoctors'>Manage Doctors</Link></li>
-
-
-
                     </ul>
 
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };
