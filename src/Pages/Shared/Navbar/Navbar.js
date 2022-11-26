@@ -28,11 +28,16 @@ const Navbar = () => {
         <li><NavLink to='/home' className={({ isActive }) =>
             isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
         }>Home</NavLink></li>
+
+        <li><NavLink to='/dashboard' className={({ isActive }) =>
+            isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
+        }>Dashboard</NavLink></li>
+
         {user?.displayName ? <li><NavLink to='/login' className={({ isActive }) =>
             isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
-        } onClick={handleLogOut}>Sign out</NavLink></li> : <li><NavLink to='/login' className={({ isActive }) =>
-            isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
+        } onClick={handleLogOut}>Sign out</NavLink></li> : <li><NavLink to='/login' className={({ isActive }) => isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
         }>Login</NavLink></li>}
+
         <li><NavLink to='/blog' className={({ isActive }) =>
             isActive ? "text-primary text-lg font-bold" : "text-accent font-bold"
         }>Blog</NavLink></li>
@@ -71,9 +76,9 @@ const Navbar = () => {
                     </div>
                     {user?.displayName ? <p className='hidden lg:block text-primary text-sm pr-2 font-bold'>Hi {user.displayName}</p> : ""}
                     <p onClick={() => setToggleTheme(!toggleTheme)} className="text-2xl font-extrabold lg:pr-6">{toggleTheme ? <CiDark /> : <CiLight />}</p>
-                    {/* <label htmlFor='dashboard-drawer' tabIndex={2} className="btn btn-ghost lg:hidden">
+                    <label htmlFor='dashboard-drawer' tabIndex={2} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                    </label> */}
+                    </label>
                 </div>
             </div>
 

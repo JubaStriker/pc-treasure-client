@@ -20,7 +20,6 @@ const Login = () => {
         signIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
                 navigate(from, { replace: true });
             })
             .catch(error => {
@@ -39,6 +38,7 @@ const Login = () => {
                 const type = 'Buyer';
                 saveGUser(name, email, type)
                 setLoginError('');
+                navigate(from, { replace: true });
 
             })
             .catch(error => {
