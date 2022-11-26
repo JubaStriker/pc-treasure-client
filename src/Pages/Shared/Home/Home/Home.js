@@ -48,7 +48,8 @@ const Home = () => {
                         <img className="object-center object-cover h-full w-full" src={category.image} alt="girl" />
 
                         <button className="bottom-4 z-10 absolute text-base font-medium  text-gray-100 py-3 w-36 ">
-                            <Link to={`/category/${category._id}`} ><div className="btn btn-accent text-white">{category.name}</div></Link>
+                            <Link to={`/category/${category._id}`} ><div className="btn text-white bg-gradient-to-r from-primary to-secondary border-0
+                        hover:text-gray-200">{category.name}</div></Link>
                         </button>
 
                     </div>
