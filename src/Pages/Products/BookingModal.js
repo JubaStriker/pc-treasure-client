@@ -34,7 +34,6 @@ const BookingModal = ({ product, setProduct }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.acknowledged) {
                     setProduct(null);
                     toast.success('Booking confirmed')
@@ -42,10 +41,9 @@ const BookingModal = ({ product, setProduct }) => {
                 else {
                     toast.error(data.message);
                 }
-
             })
 
-        console.log(booking);
+
     }
 
     return (

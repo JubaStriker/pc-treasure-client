@@ -1,4 +1,5 @@
 import { Player } from '@lottiefiles/react-lottie-player';
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -6,10 +7,11 @@ import { AuthContext } from '../../Context/AuthProvider';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { signIn } = useContext(AuthContext);
+    const { signIn, providerLogin } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
+    const googleProvider = new GoogleAuthProvider();
 
     const from = location.state?.from?.pathname || '/';
 
@@ -25,6 +27,40 @@ const Login = () => {
                 console.log(error.message)
                 setLoginError(error.message);
             });
+    }
+
+    const handleGoogleLogin = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                const name = user.displayName;
+                const email = user.email;
+                const type = 'Buyer';
+                saveGUser(name, email, type)
+                setLoginError('');
+
+            })
+            .catch(error => {
+                console.error('Error', error);
+                setLoginError(error.message);
+            });
+
+    }
+    const saveGUser = (name, email, type) => {
+        const user = { name, email, type };
+        fetch('http://localhost:5000/gusers', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                navigate('/')
+                console.log(data);
+            })
     }
 
     return (
@@ -60,7 +96,7 @@ const Login = () => {
                     </form>
                     <p>New to Doctors Portal <Link className='text-secondary' to="/signup">Create new Account</Link></p>
                     <div className="divider">OR</div>
-                    <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                    <button onClick={handleGoogleLogin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
                 </div>
                 <Player
                     src='https://assets5.lottiefiles.com/packages/lf20_xlmz9xwm.json'
