@@ -2,10 +2,13 @@ import { Player } from '@lottiefiles/react-lottie-player';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
+import axios from "axios";
+import { TiTick } from 'react-icons/ti'
 
 const Home = () => {
 
     const [categories, setCategories] = useState([])
+    const [advertisement, setAdvertisement] = useState([])
 
     useEffect(() => {
         fetch("http://localhost:5000/products")
@@ -13,7 +16,16 @@ const Home = () => {
             .then(data => setCategories(data))
     }, [])
 
-    console.log(categories);
+    const url = 'http://localhost:5000/advertisement'
+
+    useEffect(() => {
+        axios.get(url)
+            .then(response => setAdvertisement(response.data))
+    }, [])
+
+    console.log('ad', advertisement);
+
+
 
 
 
@@ -59,6 +71,30 @@ const Home = () => {
 
             </div>
 
+            {advertisement.length >= 1 &&
+                <section>
+                    <h1 className='text-4xl lg:text-7xl font-semibold my-2'>Trending now</h1>
+
+                    <div className='grid grid-cols-1 lg:grid-cols-3 max-w-7xl mx-auto'>
+                        {advertisement.map(product =>
+                            <div key={product._id} className="card card-compact lg:w-96 bg-base-100 shadow-xl hover:-translate-y-2 my-20">
+                                <figure><img src={product.picture} alt="" className='h-80 lg:w-96 sm:w-72' /></figure>
+                                <div className="card-body flex justify-start items-start">
+                                    <h2 className="card-title text-2xl">{product.name}</h2>
+                                    <p className='text-lg'>Price: {product.resalePrice} ৳</p>
+                                    <p className='text-lg'>Market price: {product.marketPrice} ৳</p>
+                                    <p className='text-lg'>Upload time: {product.time} </p>
+                                    <p className='text-lg'>Used for {product.used} months</p>
+                                    <div className='flex justify-between'>
+                                        <p className='text-lg'>Seller e-mail: {product.sellerEmail}</p>
+                                        {product.isVerified === 'true' && <p><TiTick className='text-green-600 text-xl' /></p>}
+                                    </div>
+                                    <p className='text-lg'> Location: {product.location}</p>
+                                </div>
+
+                            </div>)}
+                    </div>
+                </section>}
 
 
             <div className="w-full p-4 text-center border-0 rounded-lg sm:p-8 mt-32 ">

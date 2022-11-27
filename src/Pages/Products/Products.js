@@ -20,7 +20,7 @@ const Products = () => {
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 max-w-7xl py-6 px-10 mx-auto'>
                 {products.map((product) => <div key={product._id} className="card card-compact lg:w-96 bg-base-100 shadow-xl hover:-translate-y-2">
-                    <figure><img src={product.picture} alt="Shoes" className='h-80 lg:w-96 sm:w-72' /></figure>
+                    <figure><img src={product.picture} alt="" className='h-80 lg:w-96 sm:w-72' /></figure>
                     <div className="card-body flex justify-start items-start">
                         <h2 className="card-title text-2xl">{product.name}</h2>
                         <p className='text-lg'>Price: {product.resalePrice} ৳</p>
