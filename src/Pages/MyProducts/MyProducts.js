@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
 import ConfirmationModal from './ConfirmationModal';
+import DeleteConfirmation from './DeleteConfirmation';
 
 const MyProducts = () => {
 
@@ -20,12 +21,9 @@ const MyProducts = () => {
     // console.log(products);
     // console.log(user.email);
 
-    const handleAdvertise = (id) => {
-        console.log('id: ' + id);
-    }
     return (
         <div>
-            <h1 className='text-4xl font-semibold my-5 mx-4'>My Orders</h1>
+            <h1 className='text-4xl font-semibold my-5 mx-4'>My Products</h1>
             <div className="overflow-x-auto my-8 mx-4">
                 <table className="table w-full">
                     {/* <!-- head --> */}
@@ -54,7 +52,8 @@ const MyProducts = () => {
                                 <td>{product.name}</td>
                                 <td>{product.resalePrice}</td>
                                 <td>{product.location}</td>
-                                <td><p className='btn btn-error'>X</p></td>
+                                <td>
+                                    <label htmlFor="delete-modal"><p className='btn btn-error'>X</p></label></td>
                                 <td>
                                     <label htmlFor="my-modal-3" onClick={() => setProduct(product)} className="btn btn-sm btn-accent">Advertise</label>
                                 </td>
@@ -65,6 +64,7 @@ const MyProducts = () => {
 
                     </tbody>
                     {product && <ConfirmationModal className='hidden' product={product} setProduct={setProduct}></ConfirmationModal>}
+                    {product && <DeleteConfirmation className='hidden' product={product} setProduct={setProduct}></DeleteConfirmation>}
                 </table>
             </div>
         </div>
