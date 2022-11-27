@@ -10,6 +10,7 @@ import MyOrders from "../../Pages/Orders/MyOrders";
 import Products from "../../Pages/Products/Products";
 import Home from "../../Pages/Shared/Home/Home/Home";
 import SignUp from "../../Pages/SignUp/SignUp";
+import Users from "../../Pages/Users/Users";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/myproducts',
                 element: <MyProducts />
+            },
+            {
+                path: '/dashboard/users',
+                element: <Users />
             }
         ]
     }

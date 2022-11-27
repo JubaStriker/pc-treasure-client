@@ -39,7 +39,7 @@ const DashboardLayout = () => {
                         <li><NavLink to='/dashboard/myproducts' className={({ isActive }) =>
                             isActive ? "bg-primary text-white font-semibold" : ""
                         }>My Products</NavLink></li>
-                        <li><Link to='/dashboard/allUsers'>All users</Link></li>
+                        <li><Link to='/dashboard/users'>All users</Link></li>
 
                         <li><Link to='/dashboard/managedoctors'>Manage Users</Link></li>
                     </ul>

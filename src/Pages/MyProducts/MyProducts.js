@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
+import ConfirmationModal from './ConfirmationModal';
 
 const MyProducts = () => {
 
+    const [product, setProduct] = useState(null)
     const { user } = useContext(AuthContext)
     const url = `http://localhost:5000/myproducts?email=${user?.email}`
 
@@ -15,8 +17,12 @@ const MyProducts = () => {
             return data;
         }
     })
-    console.log(products);
-    console.log(user.email);
+    // console.log(products);
+    // console.log(user.email);
+
+    const handleAdvertise = (id) => {
+        console.log('id: ' + id);
+    }
     return (
         <div>
             <h1 className='text-4xl font-semibold my-5 mx-4'>My Orders</h1>
@@ -49,12 +55,16 @@ const MyProducts = () => {
                                 <td>{product.resalePrice}</td>
                                 <td>{product.location}</td>
                                 <td><p className='btn btn-error'>X</p></td>
-                                <td><p className='btn btn-sm btn-accent'>Advertise</p></td>
+                                <td>
+                                    <label htmlFor="my-modal-3" onClick={() => setProduct(product)} className="btn btn-sm btn-accent">Advertise</label>
+                                </td>
+                                {/* <td><p htmlFor="my-modal-3" onClick={() => setProduct(product)} className='btn btn-sm btn-accent'>Advertise</p></td> */}
 
                             </tr>)
                         }
 
                     </tbody>
+                    {product && <ConfirmationModal className='hidden' product={product} setProduct={setProduct}></ConfirmationModal>}
                 </table>
             </div>
         </div>

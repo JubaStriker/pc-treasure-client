@@ -35,7 +35,7 @@ const MyOrders = () => {
             })
     }
     if (isLoading) {
-        <Loading />
+        return <Loading />
     }
 
     return (

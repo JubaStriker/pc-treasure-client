@@ -14,12 +14,14 @@ const Login = () => {
     const googleProvider = new GoogleAuthProvider();
 
     const from = location.state?.from?.pathname || '/';
+    console.log(from);
 
     const handleLogin = data => {
         setLoginError('');
         signIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
+                console.log('Navigate');
                 navigate(from, { replace: true });
             })
             .catch(error => {

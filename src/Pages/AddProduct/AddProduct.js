@@ -20,47 +20,47 @@ const AddProduct = () => {
         formData.append('image', image);
         console.log(formData);
 
-        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
-        fetch(url, {
-            method: 'POST',
-            body: formData
-        })
-            .then(res => res.json())
-            .then(imgData => {
-                console.log(imgData);
-                if (imgData.success) {
+        // const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+        // fetch(url, {
+        //     method: 'POST',
+        //     body: formData
+        // })
+        //     .then(res => res.json())
+        //     .then(imgData => {
+        //         console.log(imgData);
+        //         if (imgData.success) {
 
-                    const product = {
-                        name: data.productName,
-                        category: data.category,
-                        picture: imgData.data.url,
-                        location: data.location,
-                        resalePrice: data.resalePrice,
-                        marketPrice: data.marketPrice,
-                        used: data.used,
-                        time: data.uploadTime,
-                        sellerName: data.sellerName,
-                        sellerEmail: data.sellerEmail,
-                        isVerified: "false"
-                    }
-                    console.log(product);
-                    fetch('http://localhost:5000/allproducts', {
-                        method: 'POST',
-                        headers: {
-                            'content-type': 'application/json',
-                        },
-                        body: JSON.stringify(product)
-                    })
-                        .then(res => res.json())
-                        .then(result => {
-                            console.log(result)
-                            toast.success(`${data.productName} added successfully`)
-                            navigate('/dashboard')
-                        })
-                }
-                console.log('failed to add');
-            })
-            .catch(errors => { console.log(errors) });
+        //             const product = {
+        //                 name: data.productName,
+        //                 category: data.category,
+        //                 picture: imgData.data.url,
+        //                 location: data.location,
+        //                 resalePrice: data.resalePrice,
+        //                 marketPrice: data.marketPrice,
+        //                 used: data.used,
+        //                 time: data.uploadTime,
+        //                 sellerName: data.sellerName,
+        //                 sellerEmail: data.sellerEmail,
+        //                 isVerified: "false"
+        //             }
+        //             console.log(product);
+        //             fetch('http://localhost:5000/allproducts', {
+        //                 method: 'POST',
+        //                 headers: {
+        //                     'content-type': 'application/json',
+        //                 },
+        //                 body: JSON.stringify(product)
+        //             })
+        //                 .then(res => res.json())
+        //                 .then(result => {
+        //                     console.log(result)
+        //                     toast.success(`${data.productName} added successfully`)
+        //                     navigate('/dashboard')
+        //                 })
+        //         }
+        //         console.log('failed to add');
+        //     })
+        //     .catch(errors => { console.log(errors) });
 
     }
 
@@ -76,7 +76,7 @@ const AddProduct = () => {
                         })} className="input input-bordered w-full max-w-lg" />
                         {errors.productName && <p className='text-red-500'>{errors.productName.message}</p>}
                     </div>
-                    <div className="form-control w-full max-w-lg">
+                    {/* <div className="form-control w-full max-w-lg">
                         <label className="label"> <span className="label-text">Market Price</span></label>
                         <input type="text" {...register("marketPrice", {
                             required: "Market price is Required"
@@ -149,7 +149,7 @@ const AddProduct = () => {
                             required: "Photo is Required"
                         })} className="input w-full max-w-xs" />
                         {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
-                    </div>
+                    </div> */}
                     <input className='btn btn-accent w-full mt-4' value="Upload" type="submit" />
 
                 </form>
