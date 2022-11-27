@@ -7,14 +7,19 @@ import { AuthContext } from '../../Context/AuthProvider';
 const AddProduct = () => {
 
     const { user } = useContext(AuthContext)
-    const imageHostKey = process.env.REACT_APP_imgbb_key
+    const imageHostKey = process.env.REACT_APP_imgbb_key;
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
     const handleAddProduct = (data) => {
+        console.log(data.productName);
         const image = data.image[0];
+        console.log(image);
         const formData = new FormData();
         formData.append('image', image);
+        console.log(formData);
+
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
         fetch(url, {
             method: 'POST',
@@ -22,6 +27,7 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(imgData => {
+                console.log(imgData);
                 if (imgData.success) {
 
                     const product = {
@@ -34,6 +40,7 @@ const AddProduct = () => {
                         used: data.used,
                         time: data.uploadTime,
                         sellerName: data.sellerName,
+                        sellerEmail: data.sellerEmail,
                         isVerified: "false"
                     }
                     console.log(product);
@@ -51,7 +58,9 @@ const AddProduct = () => {
                             navigate('/dashboard')
                         })
                 }
+                console.log('failed to add');
             })
+            .catch(errors => { console.log(errors) });
 
     }
 
@@ -111,7 +120,7 @@ const AddProduct = () => {
                     </div>
                     <div className="form-control w-full max-w-lg">
                         <label className="label"> <span className="label-text">Email</span></label>
-                        <input type="email" defaultValue={user.email} {...register("email", {
+                        <input type="email" defaultValue={user.email} disabled {...register("email", {
                             required: true
                         })} className="input input-bordered w-full max-w-lg" />
                         {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
