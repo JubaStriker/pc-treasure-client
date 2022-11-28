@@ -8,7 +8,7 @@ const MyProducts = () => {
 
     const [product, setProduct] = useState(null)
     const { user } = useContext(AuthContext)
-    const url = `http://localhost:5000/myproducts?email=${user?.email}`
+    const url = `https://pc-treasure-server.vercel.app/myproducts?email=${user?.email}`
 
     const { data: products = [] } = useQuery({
         queryKey: ['products', user?.email],

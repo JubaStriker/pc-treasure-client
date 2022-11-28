@@ -8,9 +8,9 @@ const Loading = () => {
                     <div className="px-4 py-12">
                         <div className="rounded relative">
                             <div>
-                                <div className="flex justify-center items-center bg-white py-12">
+                                <div className="flex justify-center h-screen items-center bg-white py-12">
                                     <div>
-                                        <p className="text-indigo-700 font-semibold text-6xl text-center tracking-wide">
+                                        <p className="text-primary font-semibold text-6xl text-center tracking-wide">
                                             L
                                         </p>
                                     </div>
@@ -31,7 +31,7 @@ const Loading = () => {
                                         <div className="rounded-full bg-slate-50 w-[35px] h-[35px]" />
                                     </div>
                                     <div>
-                                        <p className="text-indigo-700 font-semibold text-6xl text-center tracking-wide">
+                                        <p className="text-primary font-semibold text-6xl text-center tracking-wide">
                                             ADING
                                         </p>
                                     </div>

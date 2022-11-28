@@ -8,7 +8,7 @@ const DeleteConfirmation = ({ product }) => {
 
     const handleDelete = () => {
         console.log('id: ', product._id);
-        fetch(`http://localhost:5000/myproducts/${product._id}`, {
+        fetch(`https://pc-treasure-server.vercel.app/myproducts/${product._id}`, {
             method: 'DELETE',
 
         })
@@ -18,7 +18,7 @@ const DeleteConfirmation = ({ product }) => {
                 if (data.acknowledged === true) {
 
                     toast.success("Delete successful")
-                    fetch(`http://localhost:5000/advertisement/${product.name}?email=${user.email}`, {
+                    fetch(`https://pc-treasure-server.vercel.app/advertisement/${product.name}?email=${user.email}`, {
                         method: 'DELETE',
 
                     })

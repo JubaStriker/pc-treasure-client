@@ -60,7 +60,7 @@ const SignUp = () => {
 
     const saveUser = (name, email, role) => {
         const user = { name, email, role: role };
-        fetch('http://localhost:5000/users', {
+        fetch('https://pc-treasure-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -82,7 +82,7 @@ const SignUp = () => {
             role: role
         };
         console.log('User', user);
-        fetch('http://localhost:5000/gusers', {
+        fetch('https://pc-treasure-server.vercel.app/gusers', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

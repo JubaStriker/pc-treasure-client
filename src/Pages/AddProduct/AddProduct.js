@@ -59,7 +59,7 @@ const AddProduct = () => {
                     isVerified: isVerified
                 }
                 console.log(product);
-                fetch('http://localhost:5000/allproducts', {
+                fetch('https://pc-treasure-server.vercel.app/allproducts', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

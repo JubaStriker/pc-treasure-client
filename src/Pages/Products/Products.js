@@ -16,7 +16,7 @@ const Products = () => {
 
         product.userEmail = user.email
 
-        fetch('http://localhost:5000/wishlist', {
+        fetch('https://pc-treasure-server.vercel.app/wishlist', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -12,12 +12,12 @@ const Home = () => {
     const [advertisement, setAdvertisement] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:5000/products")
+        fetch("https://pc-treasure-server.vercel.app/products")
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
 
-    const url = 'http://localhost:5000/advertisement'
+    const url = 'https://pc-treasure-server.vercel.app/advertisement'
 
     useEffect(() => {
         axios.get(url)

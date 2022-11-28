@@ -7,7 +7,7 @@ const useVerified = (email) => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/users/verification/${email}`)
+            fetch(`https://pc-treasure-server.vercel.app/users/verification/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsVerified(data.isVerified);

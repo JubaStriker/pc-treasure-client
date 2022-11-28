@@ -7,7 +7,7 @@ import Loading from '../Shared/Loader/Loading';
 const MyOrders = () => {
 
     const { user } = useContext(AuthContext)
-    const url = `http://localhost:5000/bookings?email=${user?.email}`
+    const url = `https://pc-treasure-server.vercel.app/bookings?email=${user?.email}`
 
     const { data: bookings = [], isLoading, refetch } = useQuery({
         queryKey: ['bookings', user?.email],
@@ -21,7 +21,7 @@ const MyOrders = () => {
 
     const handleDeleteBookings = (id) => {
         console.log('bookings id', id);
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(`https://pc-treasure-server.vercel.app/bookings/${id}`, {
             method: 'DELETE',
         })
             .then(res => res.json())

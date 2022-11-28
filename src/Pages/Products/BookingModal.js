@@ -26,7 +26,7 @@ const BookingModal = ({ product, setProduct }) => {
             email: email,
             image: picture
         }
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://pc-treasure-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

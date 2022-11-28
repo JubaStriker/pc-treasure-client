@@ -17,7 +17,7 @@ const ConfirmationModal = ({ product, setProduct }) => {
     }
 
     const handleAdvertise = () => {
-        fetch('http://localhost:5000/advertisement', {
+        fetch('https://pc-treasure-server.vercel.app/advertisement', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

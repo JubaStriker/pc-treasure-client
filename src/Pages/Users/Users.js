@@ -15,14 +15,14 @@ const Users = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users');
+            const res = await fetch('https://pc-treasure-server.vercel.app/users');
             const data = await res.json();
             return data;
         }
     })
 
     const handleDeleteUser = (user) => {
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://pc-treasure-server.vercel.app/users/${user._id}`, {
             method: 'DELETE',
 
 
@@ -38,7 +38,7 @@ const Users = () => {
     }
 
     const handleMakeVerified = (id) => {
-        fetch(`http://localhost:5000/users/verification/${id}`, {
+        fetch(`https://pc-treasure-server.vercel.app/users/verification/${id}`, {
             method: 'PUT',
         })
             .then(res => res.json())

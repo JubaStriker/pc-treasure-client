@@ -8,14 +8,14 @@ const MyWishList = () => {
     const [wishlist, setWishlist] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/wishlist/${user.email}`)
+        fetch(`https://pc-treasure-server.vercel.app/wishlist/${user.email}`)
             .then(res => res.json())
             .then(data => setWishlist(data))
     }, [user.email])
 
     return (
         <div>
-            <h1 className='text-4xl font-semibold my-5 mx-4'>My Orders</h1>
+            <h1 className='text-4xl font-semibold my-5 mx-4'>My Wishlist</h1>
             <div className="overflow-x-auto my-8 mx-4">
                 <table className="table w-full">
                     {/* <!-- head --> */}
