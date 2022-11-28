@@ -13,12 +13,14 @@ import SignUp from "../../Pages/SignUp/SignUp";
 import Users from "../../Pages/Users/Users";
 import ErrorPage from "../../Pages/Error/ErrorPage";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
+import AdminRoute from "../Admin/AdminRoute";
 
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Main />,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorPage />,
         children: [{
             path: '/',
             element: <Home />
@@ -57,19 +59,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/myorders',
-                element: <MyOrders />
+                element: <MyOrders />,
             },
             {
                 path: '/dashboard/addproduct',
-                element: <AddProduct />
+                element: <SellerRoute> <AddProduct /></SellerRoute>
             },
             {
                 path: '/dashboard/myproducts',
-                element: <MyProducts />
+                element: <SellerRoute><MyProducts /></SellerRoute>
             },
             {
                 path: '/dashboard/users',
-                element: <Users />
+                element: <AdminRoute><Users /></AdminRoute>
             }
         ]
     }
