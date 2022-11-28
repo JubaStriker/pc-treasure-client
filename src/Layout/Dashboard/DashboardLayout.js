@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
 import { ThemeContext } from '../../Context/Theme/ThemeProvider';
+import useSeller from '../../Hooks/useSeller';
 import Footer from '../../Pages/Shared/Footer/Footer';
 import Navbar from '../../Pages/Shared/Navbar/Navbar';
 
@@ -15,6 +17,10 @@ const DashboardLayout = () => {
     else {
         theme = "dark";
     }
+
+    const { user } = useContext(AuthContext)
+    const [isSeller] = useSeller(user.email)
+
     return (
         <div data-theme={`${theme}`}>
             <Navbar></Navbar>
@@ -33,12 +39,13 @@ const DashboardLayout = () => {
                         <li><NavLink to='/dashboard/myorders' className={({ isActive }) =>
                             isActive ? "bg-primary text-white font-semibold" : ""
                         }>My Orders</NavLink></li>
-                        <li><NavLink to='/dashboard/addproduct' className={({ isActive }) =>
-                            isActive ? "bg-primary text-white font-semibold" : ""
-                        }>Add Products</NavLink></li>
-                        <li><NavLink to='/dashboard/myproducts' className={({ isActive }) =>
-                            isActive ? "bg-primary text-white font-semibold" : ""
-                        }>My Products</NavLink></li>
+                        {isSeller && <>
+                            <li><NavLink to='/dashboard/addproduct' className={({ isActive }) =>
+                                isActive ? "bg-primary text-white font-semibold" : ""
+                            }>Add Products</NavLink></li>
+                            <li><NavLink to='/dashboard/myproducts' className={({ isActive }) =>
+                                isActive ? "bg-primary text-white font-semibold" : ""
+                            }>My Products</NavLink></li></>}
                         <li><Link to='/dashboard/users'>All Users</Link></li>
 
                         <li><Link to='/dashboard/managedoctors'>Manage Users</Link></li>

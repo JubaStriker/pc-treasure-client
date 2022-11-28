@@ -127,8 +127,8 @@ const SignUp = () => {
                                 required: true
                             })} className="select select-bordered w-full max-w-xs">
 
-                                <option>Seller</option>
                                 <option>Buyer</option>
+                                <option>Seller</option>
                             </select>
                         </div>
                         <input className='btn btn-accent w-full mt-4' value="Sign Up" type="submit" />
