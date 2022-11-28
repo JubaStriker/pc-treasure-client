@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../Context/AuthProvider';
 
 const DeleteConfirmation = ({ product }) => {
+
+    const { user } = useContext(AuthContext)
 
     const handleDelete = () => {
         console.log('id: ', product._id);
@@ -15,6 +18,19 @@ const DeleteConfirmation = ({ product }) => {
                 if (data.acknowledged === true) {
 
                     toast.success("Delete successful")
+                    fetch(`http://localhost:5000/advertisement/${product.name}?email=${user.email}`, {
+                        method: 'DELETE',
+
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            if (data.acknowledged === true) {
+
+                                toast.success("Removed from advertisement")
+                            }
+
+                        })
                 }
 
             })
