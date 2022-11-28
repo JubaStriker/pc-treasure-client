@@ -138,7 +138,7 @@ const SignUp = () => {
                         <input className='btn btn-accent w-full mt-4' value="Sign Up" type="submit" />
                         {signUpError && <p className='text-red-600'>{signUpError}</p>}
                     </form>
-                    <p>Already have an account <Link className='text-secondary' to="/login">Please Login</Link></p>
+                    <p>Already have an account? <Link className='text-secondary font-semibold' to="/login">Please Login</Link></p>
                     <div className="divider">OR</div>
                     <button onClick={handleGoogleLogin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
 
