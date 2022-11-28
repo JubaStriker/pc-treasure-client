@@ -30,7 +30,7 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(data.name, data.email, data.type);
+                        saveUser(data.name, data.email, data.role);
                     })
                     .catch(err => console.log(err));
             })
@@ -44,11 +44,10 @@ const SignUp = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                console.log(user);
                 const name = user.displayName;
                 const email = user.email;
-                const type = 'Buyer';
-                saveGUser(name, email, type)
+                const role = 'Buyer';
+                saveGUser(name, email, role)
                 setSignUPError('');
 
             })
@@ -59,8 +58,8 @@ const SignUp = () => {
 
     }
 
-    const saveUser = (name, email, type) => {
-        const user = { name, email, type };
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role: role };
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
@@ -76,8 +75,13 @@ const SignUp = () => {
             })
     }
 
-    const saveGUser = (name, email, type) => {
-        const user = { name, email, type };
+    const saveGUser = (name, email, role) => {
+        const user = {
+            name: name,
+            email: email,
+            role: role
+        };
+        console.log('User', user);
         fetch('http://localhost:5000/gusers', {
             method: 'POST',
             headers: {
@@ -123,7 +127,7 @@ const SignUp = () => {
                         </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label"> <span className="label-text">Account type</span></label>
-                            <select {...register("type", {
+                            <select {...register("role", {
                                 required: true
                             })} className="select select-bordered w-full max-w-xs">
 

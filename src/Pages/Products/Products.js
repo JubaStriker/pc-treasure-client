@@ -29,7 +29,7 @@ const Products = () => {
                         <p className='text-lg'>Used for {product.used} months</p>
                         <div className='flex justify-between'>
                             <p className='text-lg'>Seller: {product.sellerName}</p>
-                            {product.isVerified === 'true' && <p><TiTick className='text-green-600 text-xl' /></p>}
+                            {product.isVerified === true && <p><TiTick className='text-green-600 text-xl' /></p>}
                         </div>
                         <p className='text-lg'> Location: {product.location}</p>
 

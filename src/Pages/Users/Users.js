@@ -37,6 +37,20 @@ const Users = () => {
             })
     }
 
+    const handleMakeVerified = (id) => {
+        fetch(`http://localhost:5000/users/verification/${id}`, {
+            method: 'PUT',
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    toast.success("Verification successful")
+                    refetch()
+                }
+            })
+    }
+
     return (
         <div>
             <h1 className='text-4xl font-semibold my-5 mx-4'>Users</h1>
@@ -67,7 +81,7 @@ const Users = () => {
                                 <td>{user.role}</td>
                                 <td>{user.isVerified === 'true' && <p><TiTick className='text-green-600 text-xl' /></p>}</td>
                                 <td><label onClick={() => setDeletingUser(user)} htmlFor="confirmation-modal1" className="btn btn-xs btn-error">Delete</label></td>
-                                <td><p className='btn btn-sm btn-accent'>Make Verified</p></td>
+                                <td>{user?.isVerified !== 'true' && <p onClick={() => handleMakeVerified(user._id)} className='btn btn-sm btn-accent'>Make Verified</p>}</td>
 
                             </tr>)
                         }

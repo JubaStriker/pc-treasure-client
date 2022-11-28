@@ -23,7 +23,7 @@ const Home = () => {
             .then(response => setAdvertisement(response.data))
     }, [])
 
-    console.log('ad', advertisement);
+
 
 
 

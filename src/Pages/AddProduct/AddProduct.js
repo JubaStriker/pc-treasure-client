@@ -2,10 +2,16 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
+import useVerified from '../../Hooks/useVerified';
+import Loading from '../../Pages/Shared/Loader/Loading'
 
 const AddProduct = () => {
 
     const { user } = useContext(AuthContext)
+    const [isVerified, isVerifiedLoading] = useVerified(user.email)
+    console.log(isVerified)
+
+    const verification = isVerified;
     const imageHostKey = process.env.REACT_APP_imgbb_key;
 
     const navigate = useNavigate();
@@ -24,7 +30,7 @@ const AddProduct = () => {
         const email = form.email.value;
         const sellerName = form.sellerName.value;
         const category = form.category.value;
-        const isVerified = 'false';
+        const isVerified = verification;
         const date = new Date(Date.now()).toISOString();
         const time = form.uploadTime.value;
         const formData = new FormData();
@@ -68,54 +74,11 @@ const AddProduct = () => {
                     })
             })
 
-        // const image = event.target.value.image[0];
-        // console.log(image);
-        // const formData = new FormData();
-        // formData.append('image', image);
-        // console.log(formData);
 
-        // const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
-        // fetch(url, {
-        //     method: 'POST',
-        //     body: formData
-        // })
-        //     .then(res => res.json())
-        //     .then(imgData => {
-        //         console.log(imgData);
-        //         if (imgData.success) {
+    }
 
-        //             const product = {
-        //                 name: data.productName,
-        //                 category: data.category,
-        //                 picture: imgData.data.url,
-        //                 location: data.location,
-        //                 resalePrice: data.resalePrice,
-        //                 marketPrice: data.marketPrice,
-        //                 used: data.used,
-        //                 time: data.uploadTime,
-        //                 sellerName: data.sellerName,
-        //                 sellerEmail: data.sellerEmail,
-        //                 isVerified: "false"
-        //             }
-        //             console.log(product);
-        //             fetch('http://localhost:5000/allproducts', {
-        //                 method: 'POST',
-        //                 headers: {
-        //                     'content-type': 'application/json',
-        //                 },
-        //                 body: JSON.stringify(product)
-        //             })
-        //                 .then(res => res.json())
-        //                 .then(result => {
-        //                     console.log(result)
-        //                     toast.success(`${data.productName} added successfully`)
-        //                     navigate('/dashboard')
-        //                 })
-        //         }
-        //         console.log('failed to add');
-        //     })
-        //     .catch(errors => { console.log(errors) });
-
+    if (isVerifiedLoading) {
+        return <Loading />
     }
 
     return (

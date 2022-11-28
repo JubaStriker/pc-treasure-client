@@ -17,7 +17,7 @@ const MyOrders = () => {
             return data;
         }
     })
-    console.log('bookings', bookings);
+
 
     const handleDeleteBookings = (id) => {
         console.log('bookings id', id);

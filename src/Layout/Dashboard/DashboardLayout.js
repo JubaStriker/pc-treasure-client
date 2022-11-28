@@ -23,7 +23,7 @@ const DashboardLayout = () => {
     const [isSeller] = useSeller(user.email)
     const [isAdmin] = useAdmin(user.email)
 
-    console.log('admin: ', isAdmin);
+
 
     return (
         <div data-theme={`${theme}`}>

@@ -14,14 +14,12 @@ const Login = () => {
     const googleProvider = new GoogleAuthProvider();
 
     const from = location.state?.from?.pathname || '/';
-    console.log(from);
 
     const handleLogin = data => {
         setLoginError('');
         signIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log('Navigate');
                 navigate(from, { replace: true });
             })
             .catch(error => {
@@ -34,11 +32,10 @@ const Login = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                console.log(user);
                 const name = user.displayName;
                 const email = user.email;
-                const type = 'Buyer';
-                saveGUser(name, email, type)
+                const role = 'Buyer';
+                saveGUser(name, email, role)
                 setLoginError('');
                 navigate(from, { replace: true });
 
@@ -49,8 +46,8 @@ const Login = () => {
             });
 
     }
-    const saveGUser = (name, email, type) => {
-        const user = { name, email, type };
+    const saveGUser = (name, email, role) => {
+        const user = { name, email, role };
         fetch('http://localhost:5000/gusers', {
             method: 'POST',
             headers: {
@@ -61,7 +58,7 @@ const Login = () => {
             .then(res => res.json())
             .then(data => {
                 navigate('/')
-                console.log(data);
+
             })
     }
 
