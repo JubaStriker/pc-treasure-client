@@ -39,7 +39,9 @@ const DashboardLayout = () => {
                     <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
                     <ul className="menu p-4 w-80 text-base-content bg-base-200">
                         {/* <!-- Sidebar content here --> */}
-
+                        <li><NavLink to='/dashboard/wishlist' className={({ isActive }) =>
+                            isActive ? "bg-primary text-white font-semibold" : ""
+                        }>My Wishlist</NavLink></li>
                         <li><NavLink to='/dashboard/myorders' className={({ isActive }) =>
                             isActive ? "bg-primary text-white font-semibold" : ""
                         }>My Orders</NavLink></li>
@@ -52,8 +54,6 @@ const DashboardLayout = () => {
                             }>My Products</NavLink></li></>}
 
                         {isAdmin && <><li><Link to='/dashboard/users'>All Users</Link></li></>}
-
-                        <li><Link to='/dashboard/managedoctors'>Manage Users</Link></li>
                     </ul>
 
                 </div>

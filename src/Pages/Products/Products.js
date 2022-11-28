@@ -1,15 +1,39 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { TiTick } from 'react-icons/ti'
 import BookingModal from './BookingModal';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../Context/AuthProvider';
 
 const Products = () => {
 
     const [product, setProduct] = useState(null)
     const data = useLoaderData();
     const products = data;
-    console.log(products);
+    const { user } = useContext(AuthContext)
 
+    const handleAddWishlist = (product) => {
+
+        product.userEmail = user.email
+
+        fetch('http://localhost:5000/wishlist', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    setProduct(null);
+                    toast.success('Added to wishlist')
+                }
+                else {
+                    toast.error(data.message);
+                }
+            })
+    }
 
 
     return (
@@ -37,7 +61,9 @@ const Products = () => {
                             <label htmlFor="booking-modal" className="btn text-white bg-gradient-to-r from-primary to-secondary border-0
                         hover:text-gray-200" onClick={() => setProduct(product)}
                             >Book Now</label>
-                            {/* <button className="btn btn-primary">Book Now</button> */}
+                            <button onClick={() => handleAddWishlist(product)} className="btn text-white bg-gradient-to-r from-primary to-accent border-0
+                        hover:text-gray-200">Add to wishlist</button>
+
                         </div>
                     </div>
 

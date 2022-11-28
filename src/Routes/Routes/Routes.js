@@ -15,6 +15,7 @@ import ErrorPage from "../../Pages/Error/ErrorPage";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 import AdminRoute from "../Admin/AdminRoute";
+import MyWishList from "../../Pages/MyWishList/MyWishList";
 
 export const router = createBrowserRouter([
     {
@@ -72,6 +73,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/users',
                 element: <AdminRoute><Users /></AdminRoute>
+            },
+            {
+                path: '/dashboard/wishlist',
+                element: <MyWishList />
             }
         ]
     }

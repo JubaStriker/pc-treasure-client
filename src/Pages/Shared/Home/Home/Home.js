@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
 import axios from "axios";
 import { TiTick } from 'react-icons/ti'
+import { BiTrendingUp } from 'react-icons/bi'
 
 const Home = () => {
 
@@ -73,7 +74,7 @@ const Home = () => {
 
             {advertisement.length >= 1 &&
                 <section>
-                    <h1 className='text-4xl lg:text-7xl font-semibold my-2'>Trending now</h1>
+                    <h1 className='text-4xl lg:text-7xl font-semibold my-2'>Trending now <BiTrendingUp /></h1>
 
                     <div className='grid grid-cols-1 lg:grid-cols-3 max-w-7xl mx-auto'>
                         {advertisement.map(product =>

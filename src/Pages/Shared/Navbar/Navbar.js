@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { ThemeContext } from '../../../Context/Theme/ThemeProvider';
 import { CiLight, CiDark } from 'react-icons/ci'
 import { AuthContext } from '../../../Context/AuthProvider';
+import logo from '../../../assets/images/PC_Treasure.png'
 
 const Navbar = () => {
 
@@ -65,7 +66,13 @@ const Navbar = () => {
                             {menuItems}
                         </ul>
                     </div>
-                    <Link to='/home' className="btn btn-ghost normal-case text-xl font-mono">PC Treasure</Link>
+                    <div className='flex items-center'>
+                        <div>
+                            <img src={logo} alt="" height={50} width={50} />
+                        </div>
+                        <div> <Link to='/home' className="btn btn-ghost normal-case text-xl font-mono">PC Treasure</Link></div>
+
+                    </div>
                 </div>
 
                 <div className="navbar-end">
