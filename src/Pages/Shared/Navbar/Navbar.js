@@ -70,7 +70,7 @@ const Navbar = () => {
                         <div>
                             <img src={logo} alt="" height={50} width={50} />
                         </div>
-                        <div> <Link to='/home' className="btn btn-ghost normal-case text-xl font-mono">PC Treasure</Link></div>
+                        <div> <Link to='/home' className="btn btn-ghost btn-lg normal-case lg:text-xl font-mono ">PC Treasure</Link></div>
 
                     </div>
                 </div>

@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../Context/AuthProvider';
 import ConfirmationModal from './ConfirmationModal';
 import DeleteConfirmation from './DeleteConfirmation';
+
 
 const MyProducts = () => {
 
@@ -20,6 +22,36 @@ const MyProducts = () => {
     })
     // console.log(products);
     // console.log(user.email);
+
+    const handleDelete = () => {
+        console.log('id: ', product._id);
+        fetch(`https://pc-treasure-server.vercel.app/myproducts/${product._id}`, {
+            method: 'DELETE',
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged === true) {
+
+                    toast.success("Delete successful")
+                    fetch(`https://pc-treasure-server.vercel.app/advertisement/${product.name}?email=${user.email}`, {
+                        method: 'DELETE',
+
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            if (data.acknowledged === true) {
+
+                                toast.success("Removed from advertisement")
+                            }
+
+                        })
+                }
+
+            })
+    }
 
     return (
         <div>
@@ -64,7 +96,11 @@ const MyProducts = () => {
 
                     </tbody>
                     {product && <ConfirmationModal className='hidden' product={product} setProduct={setProduct}></ConfirmationModal>}
-                    {product && <DeleteConfirmation className='hidden' product={product} setProduct={setProduct}></DeleteConfirmation>}
+                    {<DeleteConfirmation product={product}
+                        setProduct={setProduct}
+                        handleDelete={handleDelete}>
+                    </DeleteConfirmation>}
+
                 </table>
             </div>
         </div>
