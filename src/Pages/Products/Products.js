@@ -27,13 +27,12 @@ const Products = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log("Data", data)
                 if (data.acknowledged) {
                     setProduct(null);
                     toast.success('Added to wishlist')
                 }
                 else {
-                    toast.success("Failed");
+                    toast.error("Failed");
                 }
             })
     }

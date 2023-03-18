@@ -1,3 +1,4 @@
+import { Player } from '@lottiefiles/react-lottie-player';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
 
@@ -12,6 +13,23 @@ const MyWishList = () => {
             .then(res => res.json())
             .then(data => setWishlist(data))
     }, [user.email])
+
+    if (wishlist.length === 0) {
+        return <>
+            <div className='min-h-screen my-20' >
+                <div className='flex flex-col justify-center items-center my-auto'>
+                    <Player
+                        src='https://assets8.lottiefiles.com/packages/lf20_0s6tfbuc.json'
+                        className="player h-[250px] w-[250px] md:h-[400px] md:w-[400px] mx-auto my-auto"
+                        loop
+                        autoplay
+                    />
+                    <h1 >Nothing in your wishlist</h1>
+                </div>
+            </div>
+        </>
+    }
+
 
     return (
         <div>

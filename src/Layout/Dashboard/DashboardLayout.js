@@ -37,7 +37,7 @@ const DashboardLayout = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
-                    <ul className="menu p-4 w-80 text-base-content">
+                    <ul className="menu p-4 w-80 text-base-content bg-base-100">
                         {/* <!-- Sidebar content here --> */}
                         <li><NavLink to='/dashboard/wishlist' className={({ isActive }) =>
                             isActive ? "bg-primary text-white font-semibold" : ""

@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../Context/AuthProvider';
 import toast from 'react-hot-toast';
 import Loading from '../Shared/Loader/Loading';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 const MyOrders = () => {
 
     const { user } = useContext(AuthContext)
+
     const url = `https://pc-treasure-server.vercel.app/bookings?email=${user?.email}`
 
-    const { data: bookings = [], isLoading, refetch } = useQuery({
+    const { data: bookings = [], isFetching, refetch } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
             const res = await fetch(url,);
@@ -17,6 +19,23 @@ const MyOrders = () => {
             return data;
         }
     })
+
+    if (bookings.length === 0) {
+        return <>
+            <div className='min-h-screen my-20' >
+                <div className='flex flex-col justify-center items-center my-auto'>
+                    <Player
+                        src='https://assets8.lottiefiles.com/packages/lf20_0s6tfbuc.json'
+                        className="player h-[250px] w-[250px] md:h-[400px] md:w-[400px] mx-auto my-auto"
+                        loop
+                        autoplay
+                    />
+                    <h1 >You didn't order anything</h1>
+                </div>
+            </div>
+        </>
+    }
+
 
 
     const handleDeleteBookings = (id) => {
@@ -34,7 +53,8 @@ const MyOrders = () => {
 
             })
     }
-    if (isLoading) {
+
+    if (isFetching) {
         return <Loading />
     }
 
