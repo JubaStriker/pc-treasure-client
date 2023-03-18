@@ -25,17 +25,12 @@ const Home = () => {
     }, [])
 
 
-
-
-
-
-
     return (
         <div className='p-2 lg:p-10'>
             <h1 className=' text-2xl lg:text-4xl text-center font-semibold my-2'>Welcome to <span className='font-mono'>PC Treasure</span></h1>
             <div className='flex flex-col lg:flex-row justify-around items-center'>
                 <div>
-                    <h2 className=' text-3xl lg:text-6xl font-semibold mt-8 mb-6 text-transparent bg-clip-text bg-gradient-to-tr from-primary to-success'>A secure place  to  <span><Typewriter
+                    <h2 className='text-7xl lg:text-6xl font-semibold mt-8 mb-6 text-transparent bg-clip-text bg-gradient-to-tr from-primary to-success pb-4'>A secure place  to  <span><Typewriter
                         options={{
                             strings: ['Buy', 'Sell'],
                             autoStart: true,

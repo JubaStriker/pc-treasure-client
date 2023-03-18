@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { TiTick } from 'react-icons/ti'
+import { BsBookmarkPlus } from 'react-icons/bs'
 import BookingModal from './BookingModal';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../Context/AuthProvider';
@@ -14,7 +15,8 @@ const Products = () => {
 
     const handleAddWishlist = (product) => {
 
-        product.userEmail = user.email
+        product.userEmail = user?.email
+        delete product._id;
 
         fetch('https://pc-treasure-server.vercel.app/wishlist', {
             method: 'POST',
@@ -25,12 +27,13 @@ const Products = () => {
         })
             .then(res => res.json())
             .then(data => {
+                console.log("Data", data)
                 if (data.acknowledged) {
                     setProduct(null);
                     toast.success('Added to wishlist')
                 }
                 else {
-                    toast.error(data.message);
+                    toast.success("Failed");
                 }
             })
     }
@@ -43,7 +46,7 @@ const Products = () => {
             </h1>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 max-w-7xl py-6 px-10 mx-auto'>
-                {products.map((product) => <div key={product._id} className="card card-compact lg:w-96 bg-base-100 shadow-xl hover:-translate-y-2">
+                {products.map((product) => <div key={product._id} className="card card-compact lg:w-96 bg-base-100 shadow-xl hover:scale-110 duration-500">
                     <figure><img src={product.picture} alt="" className='h-80 lg:w-96 sm:w-72' /></figure>
                     <div className="card-body flex justify-start items-start">
                         <h2 className="card-title text-2xl">{product.name}</h2>
@@ -61,8 +64,7 @@ const Products = () => {
                             <label htmlFor="booking-modal" className="btn text-white bg-gradient-to-r from-primary to-secondary border-0
                         hover:text-gray-200" onClick={() => setProduct(product)}
                             >Book Now</label>
-                            <button onClick={() => handleAddWishlist(product)} className="btn text-white bg-gradient-to-r from-primary to-accent border-0
-                        hover:text-gray-200">Add to wishlist</button>
+                            <button onClick={() => handleAddWishlist(product)} ><BsBookmarkPlus className="text-6xl text-blue-800 bg-clip-text bg-gradient-to-tr from-primary font-bold to-success pb-4" /></button>
 
                         </div>
                     </div>

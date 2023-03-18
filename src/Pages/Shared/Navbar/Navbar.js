@@ -54,41 +54,38 @@ const Navbar = () => {
         } */}
     </>
     return (
-        <div data-theme={`${theme}`}>
-            <div className="navbar bg-base-100 shadow-lg">
-                <div className="navbar-start">
-                    <div className="dropdown">
-                        <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                        </label>
-                        <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            {user?.displayName ? <p className='lg:hidden text-center text-primary text-sm pr-2 font-bold'>Hi {user.displayName}</p> : ""}
-                            {menuItems}
-                        </ul>
-                    </div>
-                    <div className='flex items-center'>
-                        <div>
-                            <img src={logo} alt="" height={50} width={50} />
-                        </div>
-                        <div> <Link to='/home' className="btn btn-ghost btn-lg normal-case lg:text-xl font-mono ">PC Treasure</Link></div>
-
-                    </div>
-                </div>
-
-                <div className="navbar-end">
-                    <div className=" hidden lg:flex">
-                        <ul className="menu menu-horizontal p-0">
-                            {menuItems}
-                        </ul>
-                    </div>
-                    {user?.displayName ? <p className='hidden lg:block text-primary text-sm pr-2 font-bold'>Hi {user.displayName}</p> : ""}
-                    <p onClick={() => setToggleTheme(!toggleTheme)} className="text-2xl font-extrabold lg:pr-6">{toggleTheme ? <CiDark /> : <CiLight />}</p>
-                    <label htmlFor='dashboard-drawer' tabIndex={2} className="btn btn-ghost lg:hidden">
+        <div data-theme={`${theme}`} className="border-b z-40 border-gray-200 shadow-md navbar sticky top-0   backdrop-filter backdrop-blur-lg bg-opacity-50">
+            <div className="navbar-start ">
+                <div className="dropdown">
+                    <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
+                    <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        {user?.displayName ? <p className='lg:hidden text-center text-primary text-sm pr-2 font-bold'>Hi {user.displayName}</p> : ""}
+                        {menuItems}
+                    </ul>
+                </div>
+                <div className='flex items-center'>
+                    <div>
+                        <img src={logo} alt="" height={50} width={50} />
+                    </div>
+                    <div> <Link to='/home' className="btn btn-ghost btn-lg normal-case lg:text-xl font-mono ">PC Treasure</Link></div>
+
                 </div>
             </div>
 
+            <div className="navbar-end">
+                <div className=" hidden lg:flex">
+                    <ul className="menu menu-horizontal p-0">
+                        {menuItems}
+                    </ul>
+                </div>
+                {user?.displayName ? <p className='hidden lg:block text-primary text-sm pr-2 font-bold'>Hi {user.displayName}</p> : ""}
+                <p onClick={() => setToggleTheme(!toggleTheme)} className="text-2xl font-extrabold lg:pr-6">{toggleTheme ? <CiDark /> : <CiLight />}</p>
+                <label htmlFor='dashboard-drawer' tabIndex={2} className="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                </label>
+            </div>
         </div>
     );
 };
