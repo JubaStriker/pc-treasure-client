@@ -26,12 +26,12 @@ const AddProduct = () => {
         const resalePrice = form.resalePrice.value;
         const used = form.used.value;
         const location = form.location.value;
-        const phone = form.phone.value;
         const email = form.email.value;
         const sellerName = form.sellerName.value;
         const category = form.category.value;
         const isVerified = verification;
         const date = new Date(Date.now()).toISOString();
+        
         const time = form.uploadTime.value;
         const formData = new FormData();
         formData.append('image', image);
