@@ -12,6 +12,7 @@ const Products = () => {
     const data = useLoaderData();
     const products = data;
     const { user } = useContext(AuthContext)
+    console.log(products)
 
     const handleAddWishlist = (product) => {
 
@@ -45,7 +46,7 @@ const Products = () => {
             </h1>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 max-w-7xl py-6 px-10 mx-auto'>
-                {products.map((product) => <div key={product._id} className="card card-compact lg:w-96 bg-base-100 shadow-xl hover:scale-110 duration-500">
+                {products.map((product) => <div key={product._id} className="card card-compact lg:w-96 bg-base-100 shadow-xl hover:scale-105 duration-500">
                     <figure><img src={product.picture} alt="" className='h-80 lg:w-96 sm:w-72' /></figure>
                     <div className="card-body flex justify-start items-start">
                         <h2 className="card-title text-2xl">{product.name}</h2>
@@ -63,7 +64,7 @@ const Products = () => {
                             <label htmlFor="booking-modal" className="btn text-white bg-gradient-to-r from-primary to-secondary border-0
                         hover:text-gray-200" onClick={() => setProduct(product)}
                             >Book Now</label>
-                            <button onClick={() => handleAddWishlist(product)} ><BsBookmarkPlus className="text-6xl text-blue-800 bg-clip-text bg-gradient-to-tr from-primary font-bold to-success pb-4" /></button>
+                            <button onClick={() => handleAddWishlist(product)} ><BsBookmarkPlus className="text-6xl text-blue-800 bg-clip-text bg-gradient-to-tr from-primary font-bold to-success pb-4 hover:font-bold hover:text-sky-500" /></button>
 
                         </div>
                     </div>

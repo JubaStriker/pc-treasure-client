@@ -15,6 +15,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 import AdminRoute from "../Admin/AdminRoute";
 import MyWishList from "../../Pages/MyWishList/MyWishList";
+import MyProductOrders from "../../Pages/MyProductOrders/MyProductOrders";
 
 export const router = createBrowserRouter([
     {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/myproducts',
                 element: <SellerRoute><MyProducts /></SellerRoute>
+            },
+            {
+                path: '/dashboard/productorders',
+                element: <SellerRoute><MyProductOrders /></SellerRoute>
             },
             {
                 path: '/dashboard/users',

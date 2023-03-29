@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import { ThemeContext } from '../../Context/Theme/ThemeProvider';
@@ -22,6 +22,11 @@ const DashboardLayout = () => {
     const { user } = useContext(AuthContext)
     const [isSeller] = useSeller(user.email)
     const [isAdmin] = useAdmin(user.email)
+    const isBuyer = !isSeller && !isAdmin;
+
+
+
+
 
 
 
@@ -39,19 +44,28 @@ const DashboardLayout = () => {
                     <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
                     <ul className="menu p-4 w-80 text-base-content bg-base-100">
                         {/* <!-- Sidebar content here --> */}
-                        <li><NavLink to='/dashboard/wishlist' className={({ isActive }) =>
+                        {
+                            isBuyer && <li><NavLink to='/dashboard/wishlist' className={({ isActive }) =>
+                                isActive ? "bg-primary text-white font-semibold" : ""
+                            }>My Wishlist</NavLink></li>
+                        }
+
+                        {isBuyer && <li><NavLink to='/dashboard/myorders' className={({ isActive }) =>
                             isActive ? "bg-primary text-white font-semibold" : ""
-                        }>My Wishlist</NavLink></li>
-                        <li><NavLink to='/dashboard/myorders' className={({ isActive }) =>
-                            isActive ? "bg-primary text-white font-semibold" : ""
-                        }>My Orders</NavLink></li>
+                        }>My Orders</NavLink>
+                        </li>}
+
                         {isSeller && <>
                             <li><NavLink to='/dashboard/addproduct' className={({ isActive }) =>
                                 isActive ? "bg-primary text-white font-semibold" : ""
                             }>Add Products</NavLink></li>
                             <li><NavLink to='/dashboard/myproducts' className={({ isActive }) =>
                                 isActive ? "bg-primary text-white font-semibold" : ""
-                            }>My Products</NavLink></li></>}
+                            }>My Products</NavLink></li>
+                            <li><NavLink to='/dashboard/productorders' className={({ isActive }) =>
+                                isActive ? "bg-primary text-white font-semibold" : ""
+                            }>My Product Orders</NavLink></li>
+                        </>}
 
                         {isAdmin && <><li><Link to='/dashboard/users'>All Users</Link></li></>}
                     </ul>

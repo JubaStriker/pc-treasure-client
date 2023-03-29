@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
@@ -9,7 +9,21 @@ const AddProduct = () => {
 
     const { user } = useContext(AuthContext)
     const [isVerified, isVerifiedLoading] = useVerified(user.email)
-    console.log(isVerified)
+    const [dateTime, setDateTime] = useState(new Date());
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setDateTime(new Date());
+        }, 1000); // Update every second
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+    const date = dateTime.toString().slice(4, 15)
+
+    let time = dateTime.toString().slice(16, 24)
+
+    let formDate = time + ", " + date
 
     const verification = isVerified;
     const imageHostKey = process.env.REACT_APP_imgbb_key;
@@ -30,9 +44,6 @@ const AddProduct = () => {
         const sellerName = form.sellerName.value;
         const category = form.category.value;
         const isVerified = verification;
-        const date = new Date(Date.now()).toISOString();
-        
-        const time = form.uploadTime.value;
         const formData = new FormData();
         formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
@@ -53,6 +64,7 @@ const AddProduct = () => {
                     resalePrice: resalePrice,
                     marketPrice: marketPrice,
                     used: used,
+                    uploadDate: date,
                     time: time,
                     sellerName: sellerName,
                     sellerEmail: email,
@@ -117,7 +129,7 @@ const AddProduct = () => {
                     <div className="form-control w-full max-w-lg">
                         <label className="label"> <span className="label-text">Upload Time</span></label>
                         <input type="text" placeholder='mm:hh AM/PM, dd/mm/yy' name="uploadTime"
-                            required
+                            required disabled defaultValue={formDate}
                             className="input input-bordered w-full max-w-lg" />
 
                     </div>
@@ -165,7 +177,7 @@ const AddProduct = () => {
                             className="input w-full max-w-xs" />
 
                     </div>
-                    <input className='btn btn-accent w-full mt-4' value="Upload" type="submit" />
+                    <input className='btn btn-accent w-full mt-4 hover:text-white hover:bg-lime-500' value="Upload" type="submit" />
 
                 </form>
             </div>
